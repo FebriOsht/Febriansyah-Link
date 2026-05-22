@@ -3,290 +3,628 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FEBRIANSYAH-LINK</title>
+  <title>FEBRIANSYAH — Digital Universe</title>
   <meta name="description" content="Temui ₿ Djarum Slayer di berbagai platform sosial media. Seorang antusias kripto dan teknologi yang membagikan berita terkini dan edukasi seputar dunia digital." />
   <meta name="keywords" content="Crypto, Teknologi, Breaking News, Djarum Slayer, Sosial Media, Crypto Enthusiast, Febriansyah, Febri Osht, OSHT" />
   <meta name="author" content="Febriansyah, Febri Osht, Djarum Slayer" />
-  <meta property="og:title" content="Link ₿ Djarum Slayer" />
+  <meta property="og:title" content="FEBRIANSYAH — Digital Universe" />
   <meta property="og:description" content="Ikuti ₿ Djarum Slayer di berbagai sosial media dan dapatkan insight seputar dunia kripto dan teknologi terkini." />
   <meta property="og:image" content="https://i.ibb.co/4ZgqvZB/avatar.png" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://linktr.ee/babyybossssss" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <link rel="icon" href="img/Febriansyah.jpg" type="image/x.icon">
-
   <style>
-    #particles-js {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #f97316;
+      --accent2: #fbbf24;
+      --glow: rgba(249,115,22,0.35);
+      --bg: #070a0f;
+      --surface: rgba(255,255,255,0.04);
+      --surface-hover: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.08);
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --card-radius: 16px;
     }
 
-  .typing {
-    border-right: 2px solid white;
-    white-space: nowrap;
-    overflow: hidden;
-    animation: typing 3s steps(30, end), blink .75s step-end infinite;
-  }
+    html { scroll-behavior: smooth; }
 
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-  @keyframes blink {
-    50% { border-color: transparent }
-  }
+    /* === CANVAS BACKGROUND === */
+    #particles-js {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-  .glitch {
-    position: relative;
-    color: #ccc;
-    font-weight: 600;
-  }
+    /* Mesh glow blobs */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .blob-1 { width: 600px; height: 600px; background: #f97316; top: -200px; left: -150px; animation: drift1 18s ease-in-out infinite alternate; }
+    .blob-2 { width: 500px; height: 500px; background: #3b82f6; bottom: -200px; right: -150px; animation: drift2 22s ease-in-out infinite alternate; }
+    .blob-3 { width: 400px; height: 400px; background: #a855f7; top: 40%; left: 50%; transform: translate(-50%,-50%); animation: drift3 16s ease-in-out infinite alternate; }
 
-  .glitch::before, .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-  }
+    @keyframes drift1 { to { transform: translate(60px, 80px); } }
+    @keyframes drift2 { to { transform: translate(-60px, -80px); } }
+    @keyframes drift3 { to { transform: translate(-40px, 60px) scale(1.15); } }
 
-  .glitch::before {
-    top: -2px;
-    color: #0ff;
-    z-index: -1;
-    animation: glitchTop 100s infinite linear alternate-reverse;
-  }
+    /* === MAIN WRAPPER === */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 480px;
+      padding: 56px 20px 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
 
-  .glitch::after {
-    top: 2px;
-    color: #f0f;
-    z-index: -1;
-    animation: glitchBottom 100s infinite linear alternate-reverse;
-  }
+    /* === HERO BADGE === */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.3);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 11px;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fadeDown 0.8s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { opacity:1; transform: scale(1); }
+      50% { opacity:0.5; transform: scale(1.5); }
+    }
 
-  @keyframes glitchTop {
-    0% { transform: translateX(0) }
-    20% { transform: translateX(-2px) }
-    40% { transform: translateX(2px) }
-    60% { transform: translateX(-1px) }
-    80% { transform: translateX(1px) }
-    100% { transform: translateX(0) }
-  }
+    /* === AVATAR === */
+    .avatar-ring {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin-bottom: 20px;
+      animation: fadeDown 0.9s ease 0.1s both;
+    }
+    .avatar-ring::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--accent), var(--accent2), #a855f7, var(--accent));
+      animation: spin 4s linear infinite;
+      z-index: -1;
+    }
+    .avatar-ring::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(249,115,22,0.3), transparent, transparent);
+      animation: spin 4s linear infinite;
+      filter: blur(8px);
+      z-index: -2;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-  @keyframes glitchBottom {
-    0% { transform: translateX(0) }
-    20% { transform: translateX(2px) }
-    40% { transform: translateX(-2px) }
-    60% { transform: translateX(1px) }
-    80% { transform: translateX(-1px) }
-    100% { transform: translateX(0) }
-  }
+    .avatar-ring img {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 3px solid var(--bg);
+    }
 
+    /* === NAME & HANDLE === */
+    .name {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      animation: fadeDown 1s ease 0.2s both;
+    }
+    .verified-icon { width: 22px; height: 22px; }
+    .handle {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 14px;
+      animation: fadeDown 1s ease 0.3s both;
+    }
+    .bio {
+      font-size: 14px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.7;
+      max-width: 340px;
+      margin-bottom: 28px;
+      animation: fadeDown 1s ease 0.35s both;
+    }
+
+    /* === CV BUTTON === */
+    .btn-cv {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 24px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      margin-bottom: 36px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 24px rgba(249,115,22,0.4);
+      animation: fadeDown 1s ease 0.4s both;
+    }
+    .btn-cv:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 0 40px rgba(249,115,22,0.6);
+    }
+    .btn-cv svg { width: 16px; height: 16px; }
+
+    /* === DIVIDER === */
+    .divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .divider-line { flex: 1; height: 1px; background: var(--border); }
+    .divider-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* === LINKS SECTION === */
+    .links-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: var(--card-radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.6s ease both;
+    }
+    .link-card:nth-child(1) { animation-delay: 0.1s; }
+    .link-card:nth-child(2) { animation-delay: 0.15s; }
+    .link-card:nth-child(3) { animation-delay: 0.2s; }
+    .link-card:nth-child(4) { animation-delay: 0.25s; }
+    .link-card:nth-child(5) { animation-delay: 0.3s; }
+    .link-card:nth-child(6) { animation-delay: 0.35s; }
+    .link-card:nth-child(7) { animation-delay: 0.4s; }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03));
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .link-card:hover::before { opacity: 1; }
+    .link-card:hover {
+      background: var(--surface-hover);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateX(4px);
+      box-shadow: -4px 0 0 var(--accent);
+    }
+
+    .link-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+    .link-icon img { width: 20px; height: 20px; display: block; }
+    .link-label { flex: 1; }
+    .link-arrow {
+      font-size: 16px;
+      color: var(--muted);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .link-card:hover .link-arrow {
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    /* icon bg colors */
+    .ic-x      { background: #000; }
+    .ic-ig     { background: linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); }
+    .ic-tiktok { background: #010101; }
+    .ic-wa     { background: #25d366; }
+    .ic-thread { background: #000; }
+    .ic-li     { background: #0a66c2; }
+    .ic-gh     { background: #1b1f24; }
+
+    /* === PERSONALITY SECTION === */
+    .personality-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .personality-grid.single { grid-template-columns: 1fr; }
+
+    .persona-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: var(--card-radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      animation: fadeUp 0.6s ease 0.5s both;
+    }
+    .persona-card:hover {
+      background: var(--surface-hover);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-3px);
+    }
+    .persona-thumb {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    /* === CRYPTO BAG === */
+    .crypto-section {
+      width: 100%;
+      margin-bottom: 36px;
+      animation: fadeUp 0.6s ease 0.6s both;
+    }
+    .crypto-inner {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 16px;
+      overflow: hidden;
+    }
+    .crypto-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .crypto-dot {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease infinite;
+    }
+
+    /* === FOOTER === */
+    .footer {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      text-align: center;
+      opacity: 0.6;
+      animation: fadeUp 0.6s ease 0.7s both;
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* === SCROLLBAR === */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(249,115,22,0.3); border-radius: 4px; }
+
+    /* === GLITCH TITLE === */
+    .glitch-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .glitch-wrap span {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      opacity: 0.6;
+    }
+    .glitch-wrap span:first-child {
+      color: #0ff;
+      animation: glitch-a 8s infinite linear alternate-reverse;
+      clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+    }
+    .glitch-wrap span:last-child {
+      color: #f0f;
+      animation: glitch-b 8s infinite linear alternate-reverse;
+      clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+    }
+    @keyframes glitch-a {
+      0%,90%,100% { transform: translateX(0); }
+      92% { transform: translateX(-3px); }
+      94% { transform: translateX(3px); }
+      96% { transform: translateX(-2px); }
+    }
+    @keyframes glitch-b {
+      0%,90%,100% { transform: translateX(0); }
+      92% { transform: translateX(3px); }
+      94% { transform: translateX(-3px); }
+      96% { transform: translateX(2px); }
+    }
+
+    /* section heading */
+    .section-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
   </style>
-  
 </head>
-<body class="bg-gradient-to-br from-gray-900 to-black min-h-screen flex items-center justify-center text-white">
+<body>
 
-  <!-- Latar Belakang Partikel -->
-  <div id="particles-js"></div>
+<div id="particles-js"></div>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
 
-  <div class="max-w-md w-full p-6 text-center">
+<div class="wrapper">
 
-        <!-- HEADER MODERN -->
-        <header class="mb-10 text-center">
-          <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl drop-shadow-lg animate-pulse">
-            HELLO WORLD !
-          </h1>
-        </header>
+  <!-- LIVE badge -->
+  <div class="hero-badge">⚡ Live &amp; Active</div>
 
-    <!-- Avatar & Profile -->
-    <div class="relative w-32 h-32 mx-auto mb-4">
-      <img src="img/Febriansyah.jpg" 
-           alt="Avatar" 
-           class="w-32 h-32 rounded-full border-4 border-blue-500 shadow-[0_0_20px_#ff9900]" />
-    </div>
-    
+  <!-- Avatar -->
+  <div class="avatar-ring">
+    <img src="img/Febriansyah.jpg" alt="Febriansyah" onerror="this.src='https://i.ibb.co/4ZgqvZB/avatar.png'" />
+  </div>
 
-    
-    <h1 class="text-2xl font-bold mb-2 flex items-center justify-center">
-      FEBRIANSYAH
-      <span class="relative inline-block w-5 h-5 ml-1">
-        <img src="https://img.icons8.com/?size=100&id=98A4yZTt9abw&format=png&color=000000" alt="Verified" class="absolute top-5/5 -translate-y-5/5 left-0 w-5 h-5" />
-      </span>
-    </h1>
+  <!-- Name -->
+  <div class="name">
+    FEBRIANSYAH
+    <img class="verified-icon" src="https://img.icons8.com/?size=100&id=98A4yZTt9abw&format=png&color=000000" alt="Verified" />
+  </div>
+  <div class="handle">@febriosht · ₿ Djarum Slayer</div>
+  <div class="bio">
+    Crypto enthusiast &amp; tech explorer. Berbagi insight seputar dunia kripto, teknologi, dan breaking news terkini.
+  </div>
 
-        <div class="flex justify-center gap-4 mt-6">
-        <a href="https://febriosht.github.io/CV-Febriansyah/" target="_blank" class="flex items-center justify-center gap-2 w-1/2 py-2 rounded-xl bg-white hover:bg-blue-500 transition text-black font-bold">
-          Curriculum Vitae
-        </a>
-    </div>
-    
-    
-    
+  <!-- CV Button -->
+  <a href="https://febriosht.github.io/CV-Febriansyah/" target="_blank" class="btn-cv">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
+      <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+    </svg>
+    Curriculum Vitae
+  </a>
 
-    <p class="mt-6 border-t border-gray-700 pt-4"></p>
+  <!-- Social Links -->
+  <div class="section-title" style="width:100%;">Social Media</div>
 
-    <p class="text-gray-300 mb-2 glitch" data-text="WELCOME TO MY DIGITAL WORLD !">WELCOME TO MY DIGITAL WORLD !</p>
-    <p class="text-gray-300 mb-6">Bergabunglah dengan saya di media sosial untuk melihat apa yang saya lakukan.</p>
+  <div class="links-section">
 
-    <div class="space-y-3">
-      <a href="https://twitter.com/babyybossssss" target="_blank" class="flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-black hover:bg-blue-600 transition text-white font-bold">
-        <img src="https://img.icons8.com/?size=100&id=13963&format=png&color=000000" alt="𝕏 Twitter" class="w-5 h-5">𝕏 (Twitter)
-      </a>
-      <a href="https://instagram.com/03.febriansyah" target="_blank" class="flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-purple-800 hover:bg-pink-600 transition text font-bold">
-        <img src="https://img.icons8.com/?size=100&id=Xy10Jcu1L2Su&format=png&color=000000" alt="Instagram" class="w-5 h-5">Instagram
-      </a>
-      <a href="https://www.tiktok.com/@febriosht" target="_blank" class="flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-red-500 hover:bg-red-700 transition text-black font-bold">
-        <img src="https://img.icons8.com/?size=100&id=11xHwSW974uy&format=png&color=000000" alt="TikTok" class="w-5 h-5">TikTok
-      </a>
-      <a href="https://whatsapp.com/channel/0029VawpOWVEAKW5aqMdLQ42" target="_blank" class="flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-green-500 hover:bg-green-600 transition font-bold">
-        <img src="https://img.icons8.com/color/24/whatsapp--v1.png" alt="WhatsApp" class="w-5 h-5">WhatsApp
-      </a>
-      <a href="https://www.threads.net/@03.febriansyah" target="_blank" class="flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-white hover:bg-gray-700 transition text-black font-bold">
-        <img src="https://img.icons8.com/?size=100&id=AS2a6aA9BwK3&format=png&color=000000" alt="Threads" class="w-5 h-5">Treads
-      </a>
-      <a href="https://www.linkedin.com/in/febriansyah-osht-347b112a4/" target="_blank" class="flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition font-bold">
-        <img src="https://img.icons8.com/?size=100&id=xuvGCOXi8Wyg&format=png&color=000000" alt="LinkedIn" class="w-5 h-5">LinkedIn
-      </a>
-      <a href="https://github.com/FebriOsht" target="_blank" class="flex items-center justify-center gap-2 w-full py-2 rounded-xl bg-gray-800 hover:bg-gray-900 transition font-bold">
-        <img src="https://img.icons8.com/?size=100&id=3tC9EQumUAuq&format=png&color=000000" alt="GitHub" class="w-5 h-5">GitHub
-      </a>
-
-      <h1 class="text-2xl font-bold mb-2 flex items-center justify-center">
-        Personality
-      </h1>
-
-      <div class="flex justify-center gap-4 mt-6">
-        <a href="https://febriosht.github.io/Djarum-Slayer/" target="_blank" class="flex items-center justify-center gap-2 w-1/2 py-2 rounded-xl bg-blue-500 hover:bg-blue-600 transition text-white">
-          <img src="img/Djarum Slayer.jpg" alt="BabyyBossssss" class="w-5 h-5">Djarum Slayer
-        </a>
-        <a href="https://cryptodirectoryindonesia.io/" target="_blank" class="flex items-center justify-center gap-2 w-1/2 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 transition text-white">
-          <img src="img/Crypto Directory Indonesia.jpg" alt="Crypto Directory Indonesia" class="w-5 h-5">Crypto Directory ID
-        </a>
+    <a href="https://twitter.com/babyybossssss" target="_blank" class="link-card">
+      <div class="link-icon ic-x">
+        <img src="https://img.icons8.com/?size=100&id=13963&format=png&color=ffffff" alt="X" />
       </div>
-            <div class="flex justify-center gap-4 mt-6">
-        <a href="https://jurnaltrading.cryptodirectoryindonesia.io/" target="_blank" class="flex items-center justify-center gap-2 w-1/2 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 transition text-white">
-          <img src="img/Jurnal Trading.png" alt="JurnalTrading" class="w-5 h-5">Jurnal Trading
-        </a>
+      <span class="link-label">𝕏 (Twitter)</span>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a href="https://instagram.com/03.febriansyah" target="_blank" class="link-card">
+      <div class="link-icon ic-ig">
+        <img src="https://img.icons8.com/?size=100&id=Xy10Jcu1L2Su&format=png&color=ffffff" alt="Instagram" />
       </div>
-    </div>
+      <span class="link-label">Instagram</span>
+      <span class="link-arrow">→</span>
+    </a>
 
-    <p class="mt-6 border-t border-gray-700 pt-4"></p>
+    <a href="https://www.tiktok.com/@febriosht" target="_blank" class="link-card">
+      <div class="link-icon ic-tiktok">
+        <img src="https://img.icons8.com/?size=100&id=11xHwSW974uy&format=png&color=ffffff" alt="TikTok" />
+      </div>
+      <span class="link-label">TikTok</span>
+      <span class="link-arrow">→</span>
+    </a>
 
-    <!-- Cryopto Bag -->
-    <div class="mb-6">
-      <h2 class="text-lg font-semibold mb-2">CRYPTO BAG :</h2>
-      <!-- TradingView Widget BEGIN -->
+    <a href="https://whatsapp.com/channel/0029VawpOWVEAKW5aqMdLQ42" target="_blank" class="link-card">
+      <div class="link-icon ic-wa">
+        <img src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="WhatsApp" />
+      </div>
+      <span class="link-label">WhatsApp Channel</span>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a href="https://www.threads.net/@03.febriansyah" target="_blank" class="link-card">
+      <div class="link-icon ic-thread">
+        <img src="https://img.icons8.com/?size=100&id=AS2a6aA9BwK3&format=png&color=ffffff" alt="Threads" />
+      </div>
+      <span class="link-label">Threads</span>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a href="https://www.linkedin.com/in/febriansyah-osht-347b112a4/" target="_blank" class="link-card">
+      <div class="link-icon ic-li">
+        <img src="https://img.icons8.com/?size=100&id=xuvGCOXi8Wyg&format=png&color=ffffff" alt="LinkedIn" />
+      </div>
+      <span class="link-label">LinkedIn</span>
+      <span class="link-arrow">→</span>
+    </a>
+
+    <a href="https://github.com/FebriOsht" target="_blank" class="link-card">
+      <div class="link-icon ic-gh">
+        <img src="https://img.icons8.com/?size=100&id=3tC9EQumUAuq&format=png&color=ffffff" alt="GitHub" />
+      </div>
+      <span class="link-label">GitHub</span>
+      <span class="link-arrow">→</span>
+    </a>
+
+  </div>
+
+  <!-- Personality -->
+  <div class="section-title" style="width:100%;">Personality</div>
+
+  <div class="personality-grid" style="margin-bottom:10px">
+    <a href="https://febriosht.github.io/Djarum-Slayer/" target="_blank" class="persona-card">
+      <img src="img/Djarum Slayer.jpg" class="persona-thumb" alt="Djarum Slayer" onerror="this.src='https://i.ibb.co/4ZgqvZB/avatar.png'" />
+      <span>Djarum Slayer</span>
+    </a>
+    <a href="https://cryptodirectoryindonesia.io/" target="_blank" class="persona-card">
+      <img src="img/Crypto Directory Indonesia.jpg" class="persona-thumb" alt="Crypto Dir ID" onerror="this.src='https://i.ibb.co/4ZgqvZB/avatar.png'" />
+      <span>Crypto Dir. ID</span>
+    </a>
+  </div>
+
+  <div class="personality-grid single" style="margin-bottom:28px">
+    <a href="https://jurnaltrading.cryptodirectoryindonesia.io/" target="_blank" class="persona-card">
+      <img src="img/Jurnal Trading.png" class="persona-thumb" alt="Jurnal Trading" onerror="this.src='https://i.ibb.co/4ZgqvZB/avatar.png'" />
+      <span>Jurnal Trading</span>
+    </a>
+  </div>
+
+  <!-- Crypto Bag -->
+  <div class="section-title" style="width:100%;">Crypto Bag</div>
+
+  <div class="crypto-section">
+    <div class="crypto-inner">
+      <div class="crypto-header">
+        <div class="crypto-dot"></div>
+        Live Market
+      </div>
       <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-          {
-            "symbols": [
-              { "proName": "BINANCE:BTCUSDT", "title": "BITCOIN" },
-              { "proName": "BINANCE:TONUSDT", "title": "TON" },
-              { "proName": "BINANCE:GALAUSDT", "title": "GALA" },
-              { "proName": "BINANCE:SANDUSDT", "title": "SAND" }
-            ],
-            "showSymbolLogo": true,
-            "colorTheme": "dark",
-            "isTransparent": true,
-            "displayMode": "compact",
-            "locale": "id"
-          }
+        {
+          "symbols": [
+            { "proName": "BINANCE:BTCUSDT", "title": "Bitcoin" },
+            { "proName": "BINANCE:TONUSDT", "title": "TON" },
+            { "proName": "BINANCE:GALAUSDT", "title": "GALA" },
+            { "proName": "BINANCE:SANDUSDT", "title": "SAND" }
+          ],
+          "showSymbolLogo": true,
+          "colorTheme": "dark",
+          "isTransparent": true,
+          "displayMode": "compact",
+          "locale": "id"
+        }
         </script>
       </div>
-      <!-- TradingView Widget END -->
     </div>
-
-    <p class="text-sm text-gray-500 mt-6">© 2025 Febri Osht. All Rights Reserved.</p>
   </div>
 
-  <script>
-    particlesJS("particles-js", {
-      "particles": {
-        "number": {
-          "value": 80,
-          "density": {
-            "enable": true,
-            "value_area": 800
-          }
-        },
-        "color": {
-          "value": "#ffffff"
-        },
-        "shape": {
-          "type": "circle",
-          "stroke": {
-            "width": 0,
-            "color": "#000000"
-          },
-          "polygon": {
-            "nb_sides": 5
-          }
-        },
-        "opacity": {
-          "value": 0.5,
-          "random": true,
-          "anim": {
-            "enable": true,
-            "speed": 1,
-            "opacity_min": 0.1,
-            "sync": false
-          }
-        },
-        "size": {
-          "value": 3,
-          "random": true,
-          "anim": {
-            "enable": true,
-            "speed": 2,
-            "size_min": 0.1,
-            "sync": false
-          }
-        },
-        "line_linked": {
-          "enable": true,
-          "distance": 150,
-          "color": "#ffffff",
-          "opacity": 0.4,
-          "width": 1
-        },
-        "move": {
-          "enable": true,
-          "speed": 6,
-          "direction": "none",
-          "random": true,
-          "straight": false,
-          "out_mode": "out",
-          "bounce": false,
-          "attract": {
-            "enable": false,
-            "rotateX": 600,
-            "rotateY": 1200
-          }
-        }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-          "onhover": {
-            "enable": true,
-            "mode": "repulse"
-          },
-          "onclick": {
-            "enable": true,
-            "mode": "push"
-          }
-        }
-      },
-      "retina_detect": true
-    });
-  </script>
+  <!-- Footer -->
+  <div class="footer">© 2026 Febri Osht — All Rights Reserved</div>
+
+</div>
+
+<script>
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 60, density: { enable: true, value_area: 900 } },
+      color: { value: ["#f97316","#fbbf24","#60a5fa","#c084fc"] },
+      shape: { type: "circle" },
+      opacity: { value: 0.4, random: true, anim: { enable: true, speed: 0.8, opacity_min: 0.05, sync: false } },
+      size: { value: 2.5, random: true, anim: { enable: true, speed: 1.5, size_min: 0.5, sync: false } },
+      line_linked: { enable: true, distance: 140, color: "#ffffff", opacity: 0.06, width: 1 },
+      move: { enable: true, speed: 1.2, direction: "none", random: true, straight: false, out_mode: "out", bounce: false }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } },
+      modes: { grab: { distance: 140, line_linked: { opacity: 0.25 } }, push: { particles_nb: 3 } }
+    },
+    retina_detect: true
+  });
+</script>
+
 </body>
 </html>
